@@ -12,27 +12,28 @@ class View {
     this.mainContainer = this.createDiv({
       className: "root__main-container",
     });
-    this.header = this.createDiv({
-      className: "main-container__header",
+    this.messageDiv = this.createDiv({
+      className: "main-container__message-div",
     });
     this.messageWindow = this.createDiv({
-      className: "header__message-window",
+      className: "message-div__message-window",
     });
     this.footerContainer = this.createDiv({
-      className: "header__footer-container",
+      className: "main-container__footer-container",
     });
     this.textArena = this.createInput({
-      className: "header__text-arena",
+      className: "footer-container__text-arena",
     });
     this.sendMessage = this.createButton({
-      className: "header__send-message",
+      className: "footer-container__send-message",
+      buttonText: "Send",
     });
 
     this.footerContainer.append(this.textArena);
     this.footerContainer.append(this.sendMessage);
-    this.header.append(this.footerContainer);
-    this.header.append(this.messageWindow);
-    this.mainContainer.append(this.header);
+    this.messageDiv.append(this.messageWindow);
+    this.mainContainer.append(this.messageDiv);
+    this.mainContainer.append(this.footerContainer);
     this.root.append(this.mainContainer);
   };
 
@@ -56,7 +57,7 @@ class View {
     const button = document.createElement("button");
 
     props.className && (button.className = props.className);
-
+    props.buttonText && (button.innerText = props.buttonText);
     return button;
   };
 }
