@@ -5,7 +5,6 @@ class Model {
 
     setMessage = message => {
         this.chat.push(message);
-        console.log(this.chat);
     }
 }
 

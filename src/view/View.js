@@ -6,8 +6,7 @@ class View {
 
   init = () => {
     this.root = document.getElementById("root");
-    this.createAvtorizationWindow();
-    
+    this.createAvtorizationWindow(); 
   };
 
   logOutButtonListener = cb => {
@@ -19,9 +18,6 @@ class View {
   
   activatedLogInButton = cb => {
     this.logInButton.addEventListener('click', () => {
-      
-      this.createMessageWindow();
-     
       cb(this.logIn.value); 
     });
   }
@@ -63,7 +59,6 @@ class View {
     this.mainContainer.append(this.footerContainer);
     this.root.append(this.logOutButton);
     this.root.append(this.mainContainer);
-
   };
 
   createAvtorizationWindow = () => {
@@ -107,6 +102,7 @@ class View {
 
     this.logIn.setAttribute("placeholder", "введите логин...")
     this.logIn.setAttribute("headers", "login");
+
     hederContainer.append(hederTxt);
     logInInputContainer.append(this.logIn);
     vindowBody.append(logInInputContainer);
@@ -115,7 +111,6 @@ class View {
     this.avtorizContainer.append(vindowBody);
     logInButtonContainer.append(this.logInButton);
     this.root.append(this.avtorizContainer);
-    
   }
 
   createDiv = (props) => {
