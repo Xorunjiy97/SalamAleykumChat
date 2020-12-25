@@ -9,10 +9,23 @@ class View {
     this.createAvtorizationWindow();
   };
 
+  logOutButtonListener = () => {
+    this.logOutButton.addEventListener('click', () =>{
+      this.createAvtorizationWindow();
+      this.mainContainer.remove();
+    });
+  }
+  
   activatedLoginButton = () => {
     this.loginButton.addEventListener('click',this.createMessageWindow);
   }
 
+  sendMessageListener = cb => {
+    this.sendMessage.addEventListener('click', () => {
+      cb(this.textArena.innerText);
+    });
+  }
+  
   createMessageWindow = () => {
     this.avtorizContainer.remove();
     this.mainContainer = this.createDiv({
@@ -44,6 +57,8 @@ class View {
     this.mainContainer.append(this.footerContainer);
     this.root.append(this.logOutButton);
     this.root.append(this.mainContainer);
+
+    this.logOutButtonListener();
   };
 
   createAvtorizationWindow = () => {
@@ -128,6 +143,7 @@ class View {
     props.className && (button.className = props.className);
     props.buttonText && (button.innerText = props.buttonText);
     props.id && (button.id = props.id);
+
     return button;
   };
 }

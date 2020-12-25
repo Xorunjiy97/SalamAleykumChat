@@ -1,6 +1,9 @@
 class Model {
-    constructor() {}
+    constructor() {
+        this.chat = [{}];
+        this.users = [];
 
+    }
 }
 
 export default Model;
