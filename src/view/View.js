@@ -7,27 +7,33 @@ class View {
   init = () => {
     this.root = document.getElementById("root");
     this.createAvtorizationWindow();
+    
   };
 
-  logOutButtonListener = () => {
+  logOutButtonListener = cb => {
     this.logOutButton.addEventListener('click', () =>{
       this.createAvtorizationWindow();
-      this.mainContainer.remove();
+      cb();
     });
   }
   
-  activatedLoginButton = () => {
-    this.loginButton.addEventListener('click',this.createMessageWindow);
+  activatedLogInButton = cb => {
+    this.logInButton.addEventListener('click', () => {
+      
+      this.createMessageWindow();
+     
+      cb(this.logIn.value); 
+    });
   }
 
   sendMessageListener = cb => {
     this.sendMessage.addEventListener('click', () => {
-      cb(this.textArena.innerText);
+      cb(this.textArena.value);
     });
   }
   
   createMessageWindow = () => {
-    this.avtorizContainer.remove();
+    this.root.innerHTML = " ";
     this.mainContainer = this.createDiv({
       className: "root__main-container",
     });
@@ -58,10 +64,10 @@ class View {
     this.root.append(this.logOutButton);
     this.root.append(this.mainContainer);
 
-    this.logOutButtonListener();
   };
 
   createAvtorizationWindow = () => {
+    this.root.innerHTML = " ";
     const hederContainer = this.createDiv({
       className: "avtoriz-container__heder-div",
     });
@@ -80,35 +86,36 @@ class View {
       id: "avtoriz-container",
     });
 
-    const loginInputContainer = this.createDiv({
+    const logInInputContainer = this.createDiv({
       className: "avtoriz-container__login-input-div"
     });
 
-    const loginButtonContainer = this.createDiv({
+    const logInButtonContainer = this.createDiv({
       className: "avtoriz-container__login-button-div"
     });
 
-    this.login = this.createInput({
+    this.logIn = this.createInput({
       className: "login-input-div__login-input",
       id: "login-input",
     }); 
 
-    this.loginButton = this.createButton({
+    this.logInButton = this.createButton({
       className: "login-button-div__login-button",
       id: "login-button",
       buttonText: "login",
     });
 
-    this.login.setAttribute("placeholder", "введите логин...")
-    this.login.setAttribute("headers", "login");
+    this.logIn.setAttribute("placeholder", "введите логин...")
+    this.logIn.setAttribute("headers", "login");
     hederContainer.append(hederTxt);
-    loginInputContainer.append(this.login);
-    vindowBody.append(loginInputContainer);
-    vindowBody.append(loginButtonContainer);
+    logInInputContainer.append(this.logIn);
+    vindowBody.append(logInInputContainer);
+    vindowBody.append(logInButtonContainer);
     this.avtorizContainer.append(hederContainer);
     this.avtorizContainer.append(vindowBody);
-    loginButtonContainer.append(this.loginButton);
+    logInButtonContainer.append(this.logInButton);
     this.root.append(this.avtorizContainer);
+    
   }
 
   createDiv = (props) => {
