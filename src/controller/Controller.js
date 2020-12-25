@@ -7,6 +7,7 @@ class Controller {
 
   init = () => {
     this.view.init();
+    this.view.activatedLoginButton();
   };
 }
 
