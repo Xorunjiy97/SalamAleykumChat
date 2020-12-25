@@ -2,6 +2,7 @@ class View {
   constructor() {
     this.root = null;
     this.logOutButton = null;
+    store.subscribe(this.onShowChat);
   }
 
   init = () => {
@@ -153,6 +154,12 @@ class View {
 
     return button;
   };
+  onShowChat = () => {
+    const { counter } = store.getState();
+
+    this._count.innerText = counter.counter;
+    // Рисуются li
+}
 }
 
 export default View;
