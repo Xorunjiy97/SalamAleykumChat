@@ -6,28 +6,28 @@ class View {
 
   init = () => {
     this.root = document.getElementById("root");
-    this.createAvtorizationWindow(); 
+    this.createAvtorizationWindow();
   };
 
-  logOutButtonListener = cb => {
-    this.logOutButton.addEventListener('click', () =>{
+  logOutButtonListener = (cb) => {
+    this.logOutButton.addEventListener("click", () => {
       this.createAvtorizationWindow();
       cb();
     });
-  }
-  
-  activatedLogInButton = cb => {
-    this.logInButton.addEventListener('click', () => {
-      cb(this.logIn.value); 
-    });
-  }
+  };
 
-  sendMessageListener = cb => {
-    this.sendMessage.addEventListener('click', () => {
+  activatedLogInButton = (cb) => {
+    this.logInButton.addEventListener("click", () => {
+      cb(this.logIn.value);
+    });
+  };
+
+  sendMessageListener = (cb) => {
+    this.sendMessage.addEventListener("click", () => {
       cb(this.textArena.value);
     });
-  }
-  
+  };
+
   createMessageWindow = () => {
     this.root.innerHTML = " ";
     this.mainContainer = this.createDiv({
@@ -49,9 +49,25 @@ class View {
       className: "footer-container__send-message",
       buttonText: "Send",
     });
+    this.messageShow = this.createDiv({
+      className: "message-window__message-show",
+    });
+    this.messageLi = this.createLi({
+      className: "message-show__message-li",      
+    });
+    this.messageUl = this.createUl({
+      className: "message-li__message-ul",
+    });
 
-    this.logOutButton = this.createButton({ className: "root__log-out-button", buttonText: "LogOut", id: "logOut" });
+    this.logOutButton = this.createButton({
+      className: "root__log-out-button",
+      buttonText: "LogOut",
+      id: "logOut",
+    });
 
+    this.messageWindow.append(this.messageShow);
+    this.messageShow.append(this.messageUl);
+    this.messageUl.append(this.messageLi);
     this.footerContainer.append(this.textArena);
     this.footerContainer.append(this.sendMessage);
     this.messageDiv.append(this.messageWindow);
@@ -82,17 +98,17 @@ class View {
     });
 
     const logInInputContainer = this.createDiv({
-      className: "avtoriz-container__login-input-div"
+      className: "avtoriz-container__login-input-div",
     });
 
     const logInButtonContainer = this.createDiv({
-      className: "avtoriz-container__login-button-div"
+      className: "avtoriz-container__login-button-div",
     });
 
     this.logIn = this.createInput({
       className: "login-input-div__login-input",
       id: "login-input",
-    }); 
+    });
 
     this.logInButton = this.createButton({
       className: "login-button-div__login-button",
@@ -100,7 +116,7 @@ class View {
       buttonText: "login",
     });
 
-    this.logIn.setAttribute("placeholder", "введите логин...")
+    this.logIn.setAttribute("placeholder", "введите логин...");
     this.logIn.setAttribute("headers", "login");
 
     hederContainer.append(hederTxt);
@@ -111,7 +127,7 @@ class View {
     this.avtorizContainer.append(vindowBody);
     logInButtonContainer.append(this.logInButton);
     this.root.append(this.avtorizContainer);
-  }
+  };
 
   createDiv = (props) => {
     const div = document.createElement("div");
@@ -122,19 +138,19 @@ class View {
     return div;
   };
 
-  createH1 = props => {
+  createH1 = (props) => {
     const h1 = document.createElement("h1");
     props.className && (h1.className = props.className);
     props.txt && (h1.innerText = props.txt);
 
     return h1;
-  }
+  };
 
   createInput = (props) => {
     const input = document.createElement("input");
 
     props.className && (input.className = props.className);
-    props.id && (input.id = props.id)
+    props.id && (input.id = props.id);
 
     return input;
   };
@@ -147,6 +163,22 @@ class View {
     props.id && (button.id = props.id);
 
     return button;
+  };
+
+  createUl = (props) => {
+    const ul = document.createElement("ul");
+
+    props.className && (ul.className = props.className);
+
+    return ul;
+  };
+
+  createLi = (props) => {
+    const li = document.createElement("li");
+
+    props.className && (li.className = props.className);
+
+    return li;
   };
 }
 
