@@ -1,3 +1,5 @@
+import * as api from './Rest';
+
 class Controller {
   constructor(view, model) {
     this.view = view;
@@ -13,6 +15,8 @@ class Controller {
   
   getLogIn = userName => {
     this.currentUser = userName;
+    this.view.createMessageWindow();
+    this.getChatInfo();
     this.view.logOutButtonListener(this.activatedLogIn.bind(this));
     this.view.sendMessageListener(this.getMessage.bind(this));
     console.log(this.currentUser);
@@ -25,16 +29,23 @@ class Controller {
   getMessage = newMessage => {
     this.currentMessage = newMessage;
     console.log(this.currentMessage);
-    this.createMessage();
-    
+    this.createMessage(); 
   }
 
   createMessage = () => {
     const userMessage = { user: this.currentUser, message: this.currentMessage }
     this.model.setMessage(userMessage);
+    api.addNewMessage(message);
+    //обновление
   }
 
-
+  getChatInfo = () => {
+    api.getChat()
+    .then(chat => {
+        console.log(chat);
+        //запускается li
+    });
+  }
 }
 
 export default Controller;
