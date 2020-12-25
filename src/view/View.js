@@ -1,11 +1,13 @@
 class View {
   constructor() {
     this.root = null;
+    this.logOutButton = null;
   }
 
   init = () => {
     this.createMessageWindow();
   };
+
 
   createMessageWindow = () => {
     this.root = document.getElementById("root");
@@ -29,11 +31,14 @@ class View {
       buttonText: "Send",
     });
 
+    this.logOutButton = this.createButton({ className: "root__log-out-button", buttonText: "LogOut", id: "logOut" });
+
     this.footerContainer.append(this.textArena);
     this.footerContainer.append(this.sendMessage);
     this.messageDiv.append(this.messageWindow);
     this.mainContainer.append(this.messageDiv);
     this.mainContainer.append(this.footerContainer);
+    this.root.append(this.logOutButton);
     this.root.append(this.mainContainer);
   };
 
@@ -58,6 +63,7 @@ class View {
 
     props.className && (button.className = props.className);
     props.buttonText && (button.innerText = props.buttonText);
+    props.id && (button.id = props.id);
     return button;
   };
 }
