@@ -3,15 +3,18 @@ import rootReducer from './root/rootReducer';
 import View from './modules/View';
 import Model from './model/Model';
 import Controller from './modules/controller/Controller';
+const root = document.getElementById('root');
 
 function init() {
   const store = createStore(rootReducer);
-  const view = new View();
-  const model = new Model();
-  const controller = new Controller(view, model);
+  const autorise = new Autorisation();
+  const autoriseController = new AutoriseController(autorise);
 
   window.store = store;
 
+  root.append(autorise.createAvtorizationWindow());
+
+  autoriseController.init();
   controller.init();
 }
 

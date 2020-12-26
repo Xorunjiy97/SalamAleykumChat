@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import * as api from './Rest';
+import * as api from './controller/Rest';
 
 class Controller {
   constructor(view, model) {
