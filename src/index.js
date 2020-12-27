@@ -1,13 +1,21 @@
 import './style.less';
-
-import View from './view/View';
-import Model from './model/Model';
-import Controller from './controller/Controller';
+import Controller from './modules/Controller';
+import ChatWindow from './modules/chatWindow/chatWindow';
+import rootReducer from './root/rootReducer';
+import Autorisation from './modules/autorize/autorisation';
+import ChatController from './modules/chatWindow/chatController';
+import { createStore } from 'redux';
+import AutoriseController from './modules/autorize/autoriseController';
 
 function init() {
-  const view = new View();
-  const model = new Model();
-  const controller = new Controller(view, model);
+  const store = createStore(rootReducer);
+  window.store = store;
+
+  const autorise = new Autorisation();
+  const autoriseController = new AutoriseController(autorise);
+  const chatWindow = new ChatWindow();
+  const chatWindowController = new ChatController(chatWindow);
+  const controller = new Controller(autoriseController, chatWindowController);
 
   controller.init();
 }
