@@ -17,7 +17,6 @@ class ChatController {
     createMessage = newMessage => {
       const { user } = store.getState();
       const userMessage = { userName: user.user, message: newMessage };
-      console.log(userMessage);
       store.dispatch(actions.addMessage(userMessage));
     }
 

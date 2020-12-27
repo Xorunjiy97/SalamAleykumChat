@@ -93,7 +93,11 @@ class Autorisation {
 
     activatedLogInButton = cb => {
         this.logInButton.addEventListener('click', () => {
-          cb(this.logInInput.value); 
+            if(this.logInInput.value){
+                cb(this.logInInput.value);
+            }else{
+                alert('Введите имя пользователя');
+            }
         });
     };
 }

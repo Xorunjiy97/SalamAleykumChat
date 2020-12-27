@@ -4,8 +4,6 @@ class ChatWindow {
         this.textArena = null;
         this.sendMessage = null;
         this.messageUl = null;
-
-        store.subscribe(this.onShowChat);
     }
   
     logOutButtonListener = cb => {
@@ -16,7 +14,11 @@ class ChatWindow {
   
     sendMessageListener = cb => {
         this.sendMessage.addEventListener('click', () => {
-            cb(this.textArena.value);
+            if(this.textArena.value){
+              cb(this.textArena.value);
+            }else{
+              alert('Введите сообщение');
+             }
         });
     }
     
@@ -53,6 +55,8 @@ class ChatWindow {
           buttonText: "LogOut",
           id: "logOut",
         });
+
+        store.subscribe(this.onShowChat);
         
         messageShow.append(this.messageUl);
         messageWindow.append(this.logOutButton);
@@ -113,14 +117,13 @@ class ChatWindow {
 
     onShowChat = () => {
       const { chat } = store.getState();
-      //this.messageUl.innerText = "";
+      this.messageUl.innerText = "";
       chat.chat.forEach(element => {
           const li = this.createLi({
             className: "ul_li",
             text: `${element.userName}` + ' : ' + `${element.message}`
           });
           this.messageUl.append(li);
-          console.log(this.messageUl);
       });
     }
   }
