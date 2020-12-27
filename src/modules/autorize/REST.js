@@ -10,7 +10,7 @@ export function addNewUser(user){
             })
             .then(response => {
                 if (response.ok) {
-                    resolve(response.json())
+                    resolve(response)
                 } else {
                     reject(new Error('НЕ Нашел'))
                 }

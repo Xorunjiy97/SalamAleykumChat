@@ -1,4 +1,4 @@
-import * as api from './Rest';
+import * as api from './REST';
 import * as actions from '../actions';
 
 class ChatController {
@@ -17,7 +17,7 @@ class ChatController {
     };
 
     getChatFromBack = () => {
-      const chat = api.getChat();
+      const { chat } = api.getChat();
       store.dispatch(actions.addMessage(chat));
     }
   

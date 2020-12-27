@@ -1,7 +1,7 @@
 export function addNewMessage(message){
     try {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:2020/addMesage', {
+            fetch('http://localhost:2021/addMessage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ export function addNewMessage(message){
             })
             .then(response => {
                 if (response.ok) {
-                    resolve(response.json())
+                    resolve(response)
                 } else {
                     reject(new Error('НЕ Нашел'))
                 }
@@ -24,11 +24,10 @@ export function addNewMessage(message){
 export function getChat(){
     try {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:2020/getChat')
+            fetch('http://localhost:2021/getChat')
             .then(response => {
-                console.log(response)
                 if (response.ok) {
-                    resolve(response.json())
+                    resolve(response)
                 } else {
                     reject(new Error('НЕ Нашел'))
                 }
@@ -42,7 +41,7 @@ export function getChat(){
 export function deleteUser(user){
     try {
         return new Promise((resolve, reject) => {
-            fetch('http://localhost:2020/addMesage', {
+            fetch('http://localhost:2021/deleteUser', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +50,7 @@ export function deleteUser(user){
             })
             .then(response => {
                 if (response.ok) {
-                    resolve(response.json())
+                    resolve(response)
                 } else {
                     reject(new Error('НЕ Нашел'))
                 }
