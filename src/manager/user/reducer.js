@@ -14,7 +14,7 @@ export default (state = initialState, action ) => {
         case constants.DELETE_USER:
             return {
                 ...state,
-                user: state.user = [], 
+                user: state.user = '[]', 
             };
         default:
             return state;

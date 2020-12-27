@@ -11,7 +11,7 @@ class ChatController {
       root.append(this.view.createChatWindow());
 
       this.view.sendMessageListener(this.createMessage.bind(this));
-      this.view.logOutButtonListener();
+      this.view.logOutButtonListener(this.openAuthPage.bind(this));
     };
   
     createMessage = newMessage => {
