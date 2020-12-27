@@ -116,9 +116,9 @@ class ChatWindow {
     };
 
     onShowChat = () => {
-      const { chat } = store.getState();
+      const { chat } = store.getState().chat;
       this.messageUl.innerText = "";
-      chat.chat.forEach(element => {
+      chat.forEach(element => {
           const li = this.createLi({
             className: "ul_li",
             text: `${element.userName}` + ' : ' + `${element.message}`
