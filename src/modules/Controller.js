@@ -7,7 +7,7 @@ class Controller {
   }
 
   init = () => {
-    this.authPage.init()
+    this.authPage.init();
   }; 
 
 

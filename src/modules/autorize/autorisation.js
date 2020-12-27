@@ -51,7 +51,7 @@ class Autorisation {
         avtorizContainer.append(hederContainer);
         avtorizContainer.append(vindowBody);
         logInButtonContainer.append(this.logInButton);
-        // this.root.append(this.avtorizContainer);
+
         return avtorizContainer;
     }
 
