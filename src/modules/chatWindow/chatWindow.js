@@ -1,12 +1,15 @@
 class ChatWindow {
     constructor() {
         this.logOutButton = null;
+        this.textArena = null;
+        this.sendMessage = null;
+        this.messageUl = null;
+
         store.subscribe(this.onShowChat);
     }
   
     logOutButtonListener = cb => {
         this.logOutButton.addEventListener('click', () =>{
-            this.createAvtorizationWindow();
             cb();
         });
     }
@@ -17,45 +20,53 @@ class ChatWindow {
         });
     }
     
-    createMessageWindow = () => {
-        this.mainContainer = this.createDiv({
-            className: "root__main-container",
+    createChatWindow = () => {
+        const mainContainer = this.createDiv({
+          className: "root__main-container",
         });
-        this.messageDiv = this.createDiv({
-            className: "main-container__message-div",
+        const messageDiv = this.createDiv({
+          className: "main-container__message-div",
         });
-        this.messageWindow = this.createDiv({
-            className: "message-div__message-window",
+        const messageWindow = this.createDiv({
+          className: "message-div__message-window",
         });
-        this.footerContainer = this.createDiv({
-            className: "main-container__footer-container",
+        const footerContainer = this.createDiv({
+          className: "main-container__footer-container",
         });
         this.textArena = this.createInput({
-            className: "footer-container__text-arena",
+          className: "footer-container__text-arena",
         });
         this.sendMessage = this.createButton({
-            className: "footer-container__send-message",
-            buttonText: "Send",
+          className: "footer-container__send-message",
+          buttonText: "Send",
+        });
+        const messageShow = this.createDiv({
+          className: "message-window__message-show",
+        });
+
+        this.messageUl = this.createUl({
+          className: "message-li__message-ul",
         });
     
-        this.logOutButton = this.createButton({ 
-            className: "root__log-out-button", 
-            buttonText: "LogOut", 
-            id: "logOut" 
+        this.logOutButton = this.createButton({
+          className: "root__log-out-button",
+          buttonText: "LogOut",
+          id: "logOut",
         });
-  
-        this.footerContainer.append(this.textArena);
-        this.footerContainer.append(this.sendMessage);
-        this.messageDiv.append(this.messageWindow);
-        this.mainContainer.append(this.logOutButton);
-        this.mainContainer.append(this.messageDiv);
-        this.mainContainer.append(this.footerContainer);
-    //   this.root.append(this.logOutButton);
-    //   this.root.append(this.mainContainer);
-      return this.mainContainer;
+        
+        messageShow.append(this.messageUl);
+        messageWindow.append(this.logOutButton);
+        messageWindow.append(messageShow);
+        messageDiv.append(messageWindow);
+        footerContainer.append(this.textArena);
+        footerContainer.append(this.sendMessage);
+        mainContainer.append(messageDiv);
+        mainContainer.append(footerContainer);
+ 
+        return  mainContainer;
     };
   
-    createDiv = (props) => {
+    createDiv = props => {
       const div = document.createElement("div");
   
       props.className && (div.className = props.className);
@@ -64,7 +75,7 @@ class ChatWindow {
       return div;
     };
   
-    createInput = (props) => {
+    createInput = props => {
       const input = document.createElement("input");
   
       props.className && (input.className = props.className);
@@ -73,7 +84,7 @@ class ChatWindow {
       return input;
     };
   
-    createButton = (props) => {
+    createButton = props => {
       const button = document.createElement("button");
   
       props.className && (button.className = props.className);
@@ -82,12 +93,35 @@ class ChatWindow {
   
       return button;
     };
+
+    createUl = props => {
+        const ul = document.createElement("ul");
+    
+        props.className && (ul.className = props.className);
+    
+        return ul;
+    };
+    
+    createLi = props => {
+        const li = document.createElement("li");
+    
+        props.className && (li.className = props.className);
+        props.text && (li.innerText = props.text);
+    
+        return li;
+    };
+
     onShowChat = () => {
-      const { counter } = store.getState();
-  
-      this._count.innerText = counter.counter;
-      // Рисуются li
-  
+      const { chat } = store.getState();
+      //this.messageUl.innerText = "";
+      chat.chat.forEach(element => {
+          const li = this.createLi({
+            className: "ul_li",
+            text: `${element.userName}` + ' : ' + `${element.message}`
+          });
+          this.messageUl.append(li);
+          console.log(this.messageUl);
+      });
     }
   }
   

@@ -1,22 +1,20 @@
 import constants from '../../constants';
-import chatWindow from './manager/modules/chatWindow';
-import autorisation from './manager/modules/autorisation';
 
 const initialState = {
-    view: getState()
+    page: 'Page1'
 };
 
 export default (state = initialState, action ) => {
     switch (action.type) {
-        case constants.LOG_IN:
+        case constants.OPEN_CHAT_PAGE:
             return {
                 ...state,
-               view: state = chatWindow(),
+                page: state.page = 'Page2',
             };
-        case constants.LOG_OUT:
+        case constants.OPEN_AUTORISATION_PAGE:
             return {
                 ...state,
-                view: state = autorisation(), 
+                page: state.page = 'Page1',
             };
         default:
             return state;

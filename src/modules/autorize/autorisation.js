@@ -1,18 +1,10 @@
 class Autorisation {
     constructor() {
-        
-    
-    }
-    init = () => {
-        this.root = document.getElementById("root");
-        
-
-        
+        this.logInButton = null;
+        this.logInInput =  null;
     }
 
     createAvtorizationWindow = () => {
-        this.root.innerHTML = " ";
-
         const hederContainer = this.createDiv({
             className: "avtoriz-container__heder-div",
         });
@@ -26,7 +18,7 @@ class Autorisation {
             className: "avtoriz-container__vindow-body",
         });
     
-        this.avtorizContainer = this.createDiv({
+        const avtorizContainer = this.createDiv({
             className: "root__avtoriz-container",
             id: "avtoriz-container",
         });
@@ -39,7 +31,7 @@ class Autorisation {
             className: "avtoriz-container__login-button-div"
         });
     
-        this.logIn = this.createInput({
+        this.logInInput = this.createInput({
             className: "login-input-div__login-input",
             id: "login-input",
         }); 
@@ -50,17 +42,17 @@ class Autorisation {
             buttonText: "login",
         });
     
-        this.logIn.setAttribute("placeholder", "введите логин...")
-        this.logIn.setAttribute("headers", "login");
+        this.logInInput.setAttribute("placeholder", "введите логин...")
+        this.logInInput.setAttribute("headers", "login");
         hederContainer.append(hederTxt);
-        logInInputContainer.append(this.logIn);
+        logInInputContainer.append(this.logInInput);
         vindowBody.append(logInInputContainer);
         vindowBody.append(logInButtonContainer);
-        this.avtorizContainer.append(hederContainer);
-        this.avtorizContainer.append(vindowBody);
+        avtorizContainer.append(hederContainer);
+        avtorizContainer.append(vindowBody);
         logInButtonContainer.append(this.logInButton);
         // this.root.append(this.avtorizContainer);
-        return this.avtorizContainer;
+        return avtorizContainer;
     }
 
     createDiv = (props) => {
@@ -101,14 +93,9 @@ class Autorisation {
 
     activatedLogInButton = cb => {
         this.logInButton.addEventListener('click', () => {
-          
-        //   this.createMessageWindow();
-         
-          cb(this.logIn.value); 
+          cb(this.logInInput.value); 
         });
-      };
-
-
+    };
 }
 
 export default Autorisation;

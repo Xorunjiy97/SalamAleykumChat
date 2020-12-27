@@ -1,37 +1,29 @@
-import * as actions from './actions';
+import * as actions from '../actions';
 
 class ChatController {
     constructor(view) {
       this.view = view;
-      this.currentUser = null;
-      this.currentMessage = null;
     }
   
     init = () => {
-      this.view.init();
+      const root = document.getElementById('root');
+      root.innerHTML ='';
+      root.append(this.view.createChatWindow());
+
+      this.view.sendMessageListener(this.createMessage.bind(this));
+      this.view.logOutButtonListener();
     };
-    
-    getMessage = newMessage => {
-      this.currentMessage = newMessage;
-      console.log(this.currentMessage);
-      this.createMessage(); 
-      store.dispatch(actions.addMessage());
-      
-    }
   
-    createMessage = () => {
-      const userMessage = { user: this.currentUser, message: this.currentMessage }
-      this.model.setMessage(userMessage);
-      api.addNewMessage(message);
-      //обновлен
+    createMessage = newMessage => {
+      const { user } = store.getState();
+      const userMessage = { userName: user.user, message: newMessage };
+      console.log(userMessage);
+      store.dispatch(actions.addMessage(userMessage));
     }
-  
-    getChatInfo = () => {
-      api.getChat()
-      .then(chat => {
-          console.log(chat);
-          //запускается li
-      });
+
+    openAuthPage = () => {
+      store.dispatch(actions.deleteUser());
+      store.dispatch(actions.openAutorisationPage());
     }
   }
     

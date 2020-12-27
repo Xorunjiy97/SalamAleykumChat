@@ -1,20 +1,20 @@
 import constants from '../../constants';
 
 const initialState = {
-    user:[],
+    user: [],
 };
 
 export default (state = initialState, action ) => {
     switch (action.type) {
-        case constants.LOG_IN:
+        case constants.ADD_USER:
             return {
                 ...state,
-               user: state.push(action.payload),
+               user: state.user = action.payload,
             };
-        case constants.LOG_OUT:
+        case constants.DELETE_USER:
             return {
                 ...state,
-                user: state = [], 
+                user: state.user = [], 
             };
         default:
             return state;

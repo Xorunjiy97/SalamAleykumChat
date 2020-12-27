@@ -1,55 +1,33 @@
-import * as actions from './actions';
-import * as api from './controller/Rest';
-
 class Controller {
-  constructor(view, model) {
-    this.view = view;
-    this.model = model;
-    this.currentUser = null;
-    this.currentMessage = null;
+  constructor(authPage, chatPage) {
+      this.authPage = authPage;
+      this.chatPage = chatPage;
+
+      store.subscribe(this.getCurrentPage);
   }
 
   init = () => {
-    this.view.init();
-    this.view.activatedLogInButton(this.getLogIn.bind(this));
-  };
-  
-  getLogIn = userName => {
-    this.currentUser = userName;
-    this.view.createMessageWindow();
-    this.getChatInfo();
-    store.dispatch(actions.saveMessageStore());
-    this.view.logOutButtonListener(this.activatedLogIn.bind(this));
-    this.view.sendMessageListener(this.getMessage.bind(this));
-    console.log(this.currentUser);
-  };
-  
-  activatedLogIn = () => {
-    this.view.activatedLogInButton(this.getLogIn.bind(this));
-  }
-  
-  getMessage = newMessage => {
-    this.currentMessage = newMessage;
-    console.log(this.currentMessage);
-    this.createMessage(); 
-    store.dispatch(actions.addMessage());
-    
+    this.authPage.init()
+  }; 
+
+
+  getCurrentPage = () => {
+    const { view } = store.getState();
+      if(view.page == 'Page2') {
+        this.openChatPage(); 
+      }else{
+        this.openAuthPage();
+      }
   }
 
-  createMessage = () => {
-    const userMessage = { user: this.currentUser, message: this.currentMessage }
-    this.model.setMessage(userMessage);
-    api.addNewMessage(message);
-    //обновлен
+  openChatPage = () => {
+    this.chatPage.init();
   }
 
-  getChatInfo = () => {
-    api.getChat()
-    .then(chat => {
-        console.log(chat);
-        //запускается li
-    });
+  openAuthPage = () => {
+    this.authPage.init();
   }
+ 
 }
   
 export default Controller;

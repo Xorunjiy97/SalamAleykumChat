@@ -1,29 +1,21 @@
-import * as actions from './actions';
+import * as actions from '../actions';
 
 class AutoriseController {
     constructor(view) {
         this.view = view;
-        this.currentUser = null;
       }
 
       init = () => {
-        this.view.init();
+        const root = document.getElementById('root');
+        root.innerHTML = '';
+        root.append(this.view.createAvtorizationWindow());
         this.view.activatedLogInButton(this.getLogIn.bind(this));
       };
 
       getLogIn = userName => {
-        this.currentUser = userName;
-        // this.view.createMessageWindow();
-        // this.getChatInfo();
-        // store.dispatch(actions.saveMessageStore());
-        // this.view.logOutButtonListener(this.activatedLogIn.bind(this));
-        // this.view.sendMessageListener(this.getMessage.bind(this));
-        console.log(this.currentUser);
+        store.dispatch(actions.addUser(userName));
+        store.dispatch(actions.openChatPage());
       };
-
-      getUser = () => {this.currentUser};
-
-
 }
 
 export default AutoriseController
