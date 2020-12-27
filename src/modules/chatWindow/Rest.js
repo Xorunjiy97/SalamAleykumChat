@@ -21,7 +21,7 @@ export function addNewMessage(message){
     }
 }
 
-export function getChat() {
+export function getChat(){
     try {
         return new Promise((resolve, reject) => {
             fetch('http://localhost:2020/getChat')
@@ -36,5 +36,28 @@ export function getChat() {
         });
     } catch (e) {
         console.log('ERROR:', e)
+    }
+}
+
+export function deleteUser(user){
+    try {
+        return new Promise((resolve, reject) => {
+            fetch('http://localhost:2020/addMesage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user)
+            })
+            .then(response => {
+                if (response.ok) {
+                    resolve(response.json())
+                } else {
+                    reject(new Error('НЕ Нашел'))
+                }
+            })
+        })
+    } catch (e) {
+        console.log('ERROR', e);
     }
 }

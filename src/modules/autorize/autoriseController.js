@@ -1,4 +1,5 @@
 import * as actions from '../actions';
+import {addNewUser} from './REST';
 
 class AutoriseController {
     constructor(view) {
@@ -13,8 +14,13 @@ class AutoriseController {
       };
 
       getLogIn = userName => {
-        store.dispatch(actions.addUser(userName));
-        store.dispatch(actions.openChatPage());
+        const chekUser = addNewUser(userName);
+        if(chekUser){
+            store.dispatch(actions.addUser(userName));
+            store.dispatch(actions.openChatPage());
+        }else{
+          this.view.alertFalseLogIn();
+        }
       };
 }
 
