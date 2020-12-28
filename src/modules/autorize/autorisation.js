@@ -14,10 +14,6 @@ class Autorisation {
             txt: "Salam Aleykum",
         });
     
-        const vindowBody = this.createDiv({
-            className: "avtoriz-container__vindow-body",
-        });
-    
         const avtorizContainer = this.createDiv({
             className: "root__avtoriz-container",
             id: "avtoriz-container",
@@ -30,7 +26,7 @@ class Autorisation {
         const logInButtonContainer = this.createDiv({
             className: "avtoriz-container__login-button-div"
         });
-    
+
         this.logInInput = this.createInput({
             className: "login-input-div__login-input",
             id: "login-input",
@@ -41,21 +37,27 @@ class Autorisation {
             id: "login-button",
             buttonText: "login",
         });
-    
+
+        const windowBody = this.createDiv({
+            className: "window__login-body",
+            id: "window-body",
+        })
+
         this.logInInput.setAttribute("placeholder", "введите логин...")
         this.logInInput.setAttribute("headers", "login");
+
         hederContainer.append(hederTxt);
         logInInputContainer.append(this.logInInput);
-        vindowBody.append(logInInputContainer);
-        vindowBody.append(logInButtonContainer);
+        windowBody.append(logInInputContainer);
+        windowBody.append(logInButtonContainer);
         avtorizContainer.append(hederContainer);
-        avtorizContainer.append(vindowBody);
+        avtorizContainer.append(windowBody);
         logInButtonContainer.append(this.logInButton);
 
         return avtorizContainer;
     }
 
-    createDiv = (props) => {
+    createDiv = props => {
         const div = document.createElement("div");
     
         props.className && (div.className = props.className);
@@ -72,7 +74,7 @@ class Autorisation {
         return h1;
     }
 
-    createInput = (props) => {
+    createInput = props => {
         const input = document.createElement("input");
     
         props.className && (input.className = props.className);
@@ -81,7 +83,7 @@ class Autorisation {
         return input;
     };
 
-    createButton = (props) => {
+    createButton = props => {
         const button = document.createElement("button");
 
         props.className && (button.className = props.className);
@@ -92,14 +94,18 @@ class Autorisation {
     };
 
     activatedLogInButton = cb => {
-        this.logInButton.addEventListener('click', () => {
+        this.logInButton.addEventListener("click", () => {
             if(this.logInInput.value){
                 cb(this.logInInput.value);
             }else{
-                alert('Введите имя пользователя');
+                alert("Введите имя пользователя");
             }
         });
     };
+
+    alertFalseLogIn = () => {
+        alert("Данное имя на данный момент закреплено за другим пользователем. Попробуйте другое имя.");
+    }
 }
 
 export default Autorisation;
