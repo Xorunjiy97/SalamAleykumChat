@@ -16,6 +16,7 @@ class ChatWindow {
     this.sendMessage.addEventListener("click", () => {
       if (this.textArena.value) {
         cb(this.textArena.value);
+        this.textArena.value = "";
       } else {
         alert("Введите сообщение");
       }
@@ -116,9 +117,12 @@ class ChatWindow {
   };
 
   onShowChat = () => {
+    //console.log(store.getState());
     const { chat } = store.getState().chat;
-    this.messageUl.innerText = "";
+    //console.log(chat);
+    this.messageUl.innerHTML = " ";
     chat.forEach((element) => {
+      console.log(element);
       const li = this.createLi({
         className: "ul_li",
         text: `${element.userName}` + " : " + `${element.message}`,

@@ -38,18 +38,20 @@ class Autorisation {
             buttonText: "login",
         });
 
-        this.logInForm = document.createElement("form");
-        this.logInForm.className = "log-in_form";
+        const windowBody = this.createDiv({
+            className: "window__login-body",
+            id: "window-body",
+        })
 
         this.logInInput.setAttribute("placeholder", "введите логин...")
         this.logInInput.setAttribute("headers", "login");
 
         hederContainer.append(hederTxt);
         logInInputContainer.append(this.logInInput);
-        this.logInForm.append(logInInputContainer);
-        this.logInForm.append(logInButtonContainer);
+        windowBody.append(logInInputContainer);
+        windowBody.append(logInButtonContainer);
         avtorizContainer.append(hederContainer);
-        avtorizContainer.append( this.logInForm);
+        avtorizContainer.append(windowBody);
         logInButtonContainer.append(this.logInButton);
 
         return avtorizContainer;
@@ -92,17 +94,17 @@ class Autorisation {
     };
 
     activatedLogInButton = cb => {
-        this.logInButton.addEventListener('click', () => {
+        this.logInButton.addEventListener("click", () => {
             if(this.logInInput.value){
                 cb(this.logInInput.value);
             }else{
-                alert('Введите имя пользователя');
+                alert("Введите имя пользователя");
             }
         });
     };
 
     alertFalseLogIn = () => {
-        alert('Данное имя на данный момент закреплено за другим пользователем. Попробуйте другое имя.');
+        alert("Данное имя на данный момент закреплено за другим пользователем. Попробуйте другое имя.");
     }
 }
 

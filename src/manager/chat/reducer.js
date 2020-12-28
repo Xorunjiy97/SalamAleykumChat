@@ -1,7 +1,7 @@
-import constants from '../../constants';
+import constants from "../../constants";
 
 const initialState = {
-    chat: [],
+    chat: []
 };
 
 export default (state = initialState, action ) => {
@@ -9,9 +9,9 @@ export default (state = initialState, action ) => {
         case constants.ADD_MESSAGE:
             return {
                 ...state,
-               chat: state = state.chat.concat(action.payload),
+               chat: action.payload
             };
         default:
             return state;
     }
-}
+};

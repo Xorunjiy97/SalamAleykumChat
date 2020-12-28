@@ -1,7 +1,7 @@
-import constants from '../../constants';
+import constants from "../../constants";
 
 const initialState = {
-    page: 'Page1'
+    page: "Page1"
 };
 
 export default (state = initialState, action ) => {
@@ -9,12 +9,12 @@ export default (state = initialState, action ) => {
         case constants.OPEN_CHAT_PAGE:
             return {
                 ...state,
-                page: state.page = 'Page2',
+                page: "Page2",
             };
         case constants.OPEN_AUTORISATION_PAGE:
             return {
                 ...state,
-                page: state.page = 'Page1',
+                page: "Page1",
             };
         default:
             return state;
